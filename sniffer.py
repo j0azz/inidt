@@ -22,4 +22,15 @@ class sniffer():
         print("\n\n\n")
         ls(pkt)
 
-sniffer(1)
+if(len(sys.argv)>=2):
+    n = int(sys.argv[1])
+    if(type(n)==int):
+        sniffer(n)
+    else:
+        print("usage: \npython3 sniffer.py <num_of_packets>\n")
+else:
+    print("usage: \npython3 sniffer.py <num_of_packets>\n")
+    print("capturing 10 packets...\n\n")
+    sniffer()
+
+
