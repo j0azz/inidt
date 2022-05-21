@@ -1,19 +1,23 @@
-from scapy.all import *
-import os, sys
 
+#!/usr/bin/python3
+
+from scapy.all import *
+import sys, time
 
 class sniffer():
     def __init__(self, n_of_packets=10):
         self.start(n_of_packets)
+        
     
     def start(self, n):
         sniff(prn=lambda pkt: self.store(pkt), count=n)
     
     def store(self, pkt):
-        raw_pcap = open("raw.pcap", "w")
+        raw_pcap = open("captured/"+str(time.ctime())+".pcap", "w")
         raw_pcap.write(str(raw(pkt)))
         raw_pcap.close()
 
+        print("\n\n\n\n[+]=== PACKET CAPTURED ===[+]")
         print(pkt.summary())
         print("\n\n\n")
         hexdump(pkt)
@@ -21,7 +25,7 @@ class sniffer():
         pkt.show()
         print("\n\n\n")
         ls(pkt)
-        
+
 if(len(sys.argv)>=2):
     n = int(sys.argv[1])
     if(type(n)==int):
