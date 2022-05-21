@@ -21,7 +21,7 @@ class sniffer():
         pkt.show()
         print("\n\n\n")
         ls(pkt)
-
+sniff(iface="ath0", prn=lambda x:x.sprintf("{Dot11Beacon:%Dot11.addr3%\t%Dot11Beacon.info%\t%PrismHeader.channel%\t%Dot11Beacon.cap%}"))
 if(len(sys.argv)>=2):
     n = int(sys.argv[1])
     if(type(n)==int):
