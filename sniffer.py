@@ -10,13 +10,10 @@ class sniffer():
         
     
     def start(self, n):
-        sniff(prn=lambda pkt: self.store(pkt), count=n)
+        captured = sniff(prn=lambda pkt: self.store(pkt), count=n)
+        wrpcap("captured/"+time.ctime()+".pcap", captured)
     
     def store(self, pkt):
-        raw_pcap = open("captured/"+str(time.ctime())+".pcap", "w")
-        raw_pcap.write(str(raw(pkt)))
-        raw_pcap.close()
-
         print("\n\n\n\n[+]=== PACKET CAPTURED ===[+]")
         print(pkt.summary())
         print("\n\n\n")
