@@ -5,13 +5,13 @@ from scapy.all import *
 import sys, time
 
 class sniffer():
-    def __init__(self, n_of_packets=10):
-        self.start(n_of_packets)
-        
+    def __init__(self, n_of_packets=10, interface=None):
+        self.start(n_of_packets, interface)
     
-    def start(self, n):
-        captured = sniff(prn=lambda pkt: self.store(pkt), count=n)
-        wrpcap("captured/"+time.ctime()+".pcap", captured)
+    
+    def start(self, n, interface):
+        captured = sniff(iface=interface, prn=lambda pkt: self.store(pkt), count=n)
+        wrpcap("captured.pcap", captured)
     
     def store(self, pkt):
         print("\n\n\n\n[+]=== PACKET CAPTURED ===[+]")
